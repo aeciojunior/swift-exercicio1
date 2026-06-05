@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: blockwallet-api
+    runtime: node
+    region: ohio
+    plan: free
+    branch: main
+    rootDir: BlockWallet/blockwallet-api
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: COINGECKO_SYNC_TOP_N
+        value: "100"
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: THROTTLE_TTL
+        value: "60000"
+      - key: THROTTLE_LIMIT
+        value: "60"
